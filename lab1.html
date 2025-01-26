@@ -121,9 +121,11 @@ show()
 
       </section>
 
- <h2>Part 2:</h2>
+ <h2>Part 2: Code Experiments</h2>
         <p>
-          This is where the second documentation will go.
+        I defined two functions f(X) and g(X).
+	I defined a message.
+	I computed a composition of the functions, printed the results, and printed the message as well.
         </p>
       </section>
 
@@ -136,7 +138,20 @@ show()
 	<section id="code">
 	<pre><code class="language-python">
 
-This is where the colab will go.
+def f(x):
+  y = x**3
+  return y
+
+def g(x):
+  y = x - 7
+  return y
+
+def print_my_msg():
+  print("Hello Worlwefwefwegd!")
+
+print( f(g(10)) )
+print( g(f(-3)) )
+print_my_msg()
 		
 	</code></pre>
 
@@ -153,7 +168,9 @@ This is where the colab will go.
       
         <h2>Results &amp; Analysis</h2>
         <p>
-        This is where the results and analysis will go.
+        Return gives the output of the function.
+	Functions can be composed and executed easily.
+	print() will show the results of the functions, compositions, messages, or anything defined that is requested.
         </p>
 
 
@@ -161,14 +178,14 @@ This is where the colab will go.
 
         <figure>
           <img
-            src="sierpinski.png"
-            alt="picture"
+            src="code experiments.png"
+            alt="code"
             width="600"
             height="400"
             loading="lazy"
           />
           <figcaption>
-            caption
+		Defining Variables
           </figcaption>
         </figure>
 
@@ -184,7 +201,8 @@ This is where the colab will go.
       <section id="conclusion">
         <h2>Conclusion</h2>
         <p>
-        conclusion here
+        It is interesting to experiment with mathematical functions by writing my own code instead of
+	a computer algebra system. The terminology is logical but there is a lot of vocabulary to learn.
         </p>
       </section>
 
