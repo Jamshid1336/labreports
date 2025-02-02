@@ -1,0 +1,461 @@
+<!-- INTRODUCTION SECTION -->
+<!-- -------------------------------------------------------------------------------------------- -->
+<!-- -------------------------------------------------------------------------------------------- -->
+<!-- -------------------------------------------------------------------------------------------- -->
+<!-- -------------------------------------------------------------------------------------------- -->
+<html>
+<head> <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="stylesheet" href="https://latex.vercel.app/style.css" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.min.css"/><script defer id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']]}};</script>
+
+<title>Fractal Geometry Lab Report</title>
+
+</head>
+	
+<body id="top">
+
+
+
+  <header>
+    <h1>Fractal Geometry Lab Report</h1>
+    <p class="author">
+      [Jay Michaels] <br />
+      [February 2nd 2025]
+  </header>
+</body>
+
+
+  <main>
+    <article class="indent-pars">
+      
+      <!-- INTRODUCTION SECTION -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <section id="introduction">
+        <h2>Random Walk</h2>
+        <p>
+        random_walk(steps, step_length) is a function that makes the turtle walk a certain distance and then
+        change to a random new direction and go the same distance again. This loops for as many times as the
+        steps are defined to be. penup() and pendown() are just like drawing on a piece of paper. speed() 
+        makes the turtle walk faster or slower, so that the picture appears instantly or gradually.
+
+		
+        </p>
+      </section>
+
+
+     
+	<!-- -------------------------------------------------------------------------------------------- -->
+	<!-- -------------------------------------------------------------------------------------------- -->
+	<!-- -------------------------------------------------------------------------------------------- -->
+	<!-- -------------------------------------------------------------------------------------------- -->
+	<section id="code">
+	<pre><code class="language-python">
+
+import random
+
+# Step 1: Initialize the turtle canvas
+canvas_width = 1000
+canvas_height = 800
+initializeTurtle(initial_window_size=(canvas_width, canvas_height), mode='auto')
+
+# Step 2: Function to perform a random walk (Brownian motion)
+def random_walk(steps, step_length):
+    speed(4)             # Set speed to maximum for faster drawing
+    penup()
+    jump(450, 450)       # Start near the middle of the canvas
+    pendown()
+
+    for _ in range(steps):
+        forward(step_length)               # Move forward by the step length
+        right(random.uniform(-180, 180))   # Turn by a random angle between -180 and 180 degrees
+
+# Step 3: Execute the random walk with increased steps and/or step length
+steps = 25
+step_length = 25
+
+random_walk(steps, step_length)
+
+# Step 4: Display the result
+showturtle()
+show()
+
+
+
+	</code></pre>
+
+      </section>
+
+      <!-- RESULTS & ANALYSIS SECTION -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <section id="results">
+      
+      
+        <h2>Results &amp; Analysis</h2>
+        <p>
+        When allowed to walk enough steps, the turtle will eventually leave the visible canvas.
+        </p>
+
+
+
+
+        <figure>
+          <img
+            src="random walk.png"
+            alt="random walk"
+            width="600"
+            height="400"
+            loading="lazy"
+          />
+          <figcaption>
+            Random Walk with 1000 Steps
+          </figcaption>
+        </figure>
+
+
+
+
+      </section>
+
+ <h2>Blip Line</h2>
+        <p>
+          Each repetition of the blip line for the next order creates 1/3 of the Koch Snowflake.
+          blip_line() is the function defined that uses 1/3 of the length along with the order -1
+          to create more details.
+        </p>
+      </section>
+
+
+     
+	<!-- -------------------------------------------------------------------------------------------- -->
+	<!-- -------------------------------------------------------------------------------------------- -->
+	<!-- -------------------------------------------------------------------------------------------- -->
+	<!-- -------------------------------------------------------------------------------------------- -->
+	<section id="code">
+	<pre><code class="language-python">
+
+# Define the blip_line function
+def blip_line(length, order):
+    if order == 0:
+        forward(length)
+    else:
+        blip_line(length / 3, order - 1)
+        left(60)
+        blip_line(length / 3, order - 1)
+        right(120)
+        blip_line(length / 3, order - 1)
+        left(60)
+        blip_line(length / 3, order - 1)
+
+
+initializeTurtle()
+
+# Draw blip lines of different orders
+jump(50, 500)
+face(90)
+color('red')
+blip_line(800, 1)  # Order 1
+
+jump(50, 450)
+face(90)
+color('blue')
+blip_line(800, 2)  # Order 2
+
+jump(50, 400)
+face(90)
+color('orange')
+blip_line(800, 3)
+
+jump(50, 350)
+face(90)
+color('purple')
+blip_line(800, 4)
+
+
+show()		
+	</code></pre>
+
+
+</section>
+
+      <!-- RESULTS & ANALYSIS SECTION -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <section id="results">
+      
+      
+        <h2>Results &amp; Analysis</h2>
+        <p>
+        The length / 3 is related because the Koch Snowflake is based on an equilateral triangle where the sides
+        are being split into thirds in each iteration.
+        </p>
+
+
+
+
+        <figure>
+          <img
+            src="koch piece.png"
+            alt="koch piece"
+            width="600"
+            height="400"
+            loading="lazy"
+          />
+          <figcaption>
+            Details on the Blip
+          </figcaption>
+        </figure>
+
+
+      </section>
+
+ <h2>Koch Snowflake</h2>
+        <p>
+          Higher orders in the function provide more detail to the snowflake. Order 0 results in the
+          original equilateral triangle that the snowflake stems from.
+        </p>
+      </section>
+
+
+     
+	<!-- -------------------------------------------------------------------------------------------- -->
+	<!-- -------------------------------------------------------------------------------------------- -->
+	<!-- -------------------------------------------------------------------------------------------- -->
+	<!-- -------------------------------------------------------------------------------------------- -->
+	<section id="code">
+	<pre><code class="language-python">
+
+initializeTurtle()
+showturtle()
+
+# Define the blip_line function (Koch curve)
+def blip_line(length, order):
+    if order == 0:
+        forward(length)
+    else:
+        blip_line(length / 3, order - 1)
+        left(60)
+        blip_line(length / 3, order - 1)
+        right(120)
+        blip_line(length / 3, order - 1)
+        left(60)
+        blip_line(length / 3, order - 1)
+
+# Draw the Koch snowflake
+def koch_snowflake(length, order):
+    for _ in range(3):
+        blip_line(length, order)
+        right(120)
+
+# Set up the turtle
+jump(250, 500)
+face(0)
+color('blue')
+
+# Draw the snowflake
+length = 400
+order = 0
+koch_snowflake(length, order)
+
+show()
+
+
+		
+	</code></pre>
+
+
+</section>
+
+      <!-- RESULTS & ANALYSIS SECTION -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <section id="results">
+      
+      
+        <h2>Results &amp; Analysis</h2>
+        <p>
+        After about order 5, on my laptop at least, there is not much differentiation along the perimeter
+        of the curve.
+        </p>
+
+
+
+
+        <figure>
+          <img
+            src="koch order 0.png"
+            alt="koch order 0"
+            width="600"
+            height="400"
+            loading="lazy"
+          />
+          <figcaption>
+            Koch Snowflake Order 0
+          </figcaption>
+        </figure>
+
+       <figure>
+          <img
+            src="koch order 7.png"
+            alt="koch order 7"
+            width="600"
+            height="400"
+            loading="lazy"
+          />
+          <figcaption>
+            Koch Snowlfake Order 7
+          </figcaption>
+        </figure>
+
+
+      </section>
+	    
+      <!-- RESULTS & ANALYSIS SECTION -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <section id="results">
+
+
+        <h2>The Dragon Curve</h2>
+        <p>
+          The Dragon Curve is self-repeating. It duplicates its full self with each increased order. 
+          In order 1, there are two sides making a right angle. In order 2, those two sides have doubled 
+          and swung away from each other, and it keeps repeating that operation.
+        </p>
+      </section>
+
+
+     
+	<!-- -------------------------------------------------------------------------------------------- -->
+	<!-- -------------------------------------------------------------------------------------------- -->
+	<!-- -------------------------------------------------------------------------------------------- -->
+	<!-- -------------------------------------------------------------------------------------------- -->
+	<section id="code">
+	<pre><code class="language-python">
+
+# Define the dragon curve function
+def dragon_curve(order, length, turn_direction):
+    # Base case: if order is 0, just move forward
+    if order == 0:
+        forward(length)
+    else:
+        # Calculate the new length for each recursive step
+        new_length = length / (2 ** 0.5)
+
+        # Recursively draw the dragon curve, turning right and left as needed
+        dragon_curve(order - 1, new_length, 1)  # First segment
+        right(turn_direction * 90)             # Turn by 90 degrees
+        dragon_curve(order - 1, new_length, -1) # Second segment
+
+# Initialize the turtle for drawing
+initializeTurtle()
+
+# Move the turtle to a starting position
+jump(400, 400)
+face(0)             # Set starting direction
+color('purple')     # Choose a color
+
+# Draw the dragon curve
+order = 2          # Complexity level
+length = 300        # Initial length of each segment
+dragon_curve(order, length, 1)
+
+# Show the final drawing
+show()
+
+		
+	</code></pre>
+
+
+</section>
+
+      <!-- RESULTS & ANALYSIS SECTION -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <section id="results">
+      
+      
+        <h2>Results &amp; Analysis</h2>
+        <p>
+        It seems like with lower orders, it is easy to see the curve as made of boxes. When the order gets
+        higher, it appears the viewer is either further away to view the full image, or the boxes are 
+        getting filled in as they replicate.
+        </p>
+
+        <figure>
+          <img
+            src="dragon 2.png"
+            alt="dragon order 2"
+            width="600"
+            height="400"
+            loading="lazy"
+          />
+          <figcaption>
+            Dragon Order 2
+          </figcaption>
+        </figure>
+
+   <figure>
+          <img
+            src="dragon 10.png"
+            alt="dragon order 10"
+            width="600"
+            height="400"
+            loading="lazy"
+          />
+          <figcaption>
+            Dragon Order 10
+          </figcaption>
+        </figure>
+
+   <figure>
+          <img
+            src="dragon 15.png"
+            alt="dragon order 15"
+            width="600"
+            height="400"
+            loading="lazy"
+          />
+          <figcaption>
+            Dragon Order 15
+          </figcaption>
+        </figure>
+        
+      </section>
+
+        
+      <!-- CONCLUSION SECTION -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <section id="conclusion">
+        <h2>Conclusion</h2>
+        <p>
+        conclusion here
+        </p>
+      </section>
+
+     
+     
+     
+   
+     
+     
+     
+  </main>
+
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script> <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-python.min.js"></script>
+</body>
+</html>
