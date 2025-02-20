@@ -1,1 +1,335 @@
+<!-- INTRODUCTION SECTION -->
+<!-- -------------------------------------------------------------------------------------------- -->
+<!-- -------------------------------------------------------------------------------------------- -->
+<!-- -------------------------------------------------------------------------------------------- -->
+<!-- -------------------------------------------------------------------------------------------- -->
+<html>
+<head> <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="stylesheet" href="https://latex.vercel.app/style.css" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.min.css"/><script defer id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']]}};</script>
 
+<title>Fractal Geometry Lab Report</title>
+
+</head>
+	
+<body id="top">
+
+
+
+  <header>
+    <h1>Fractal Geometry Lab Report</h1>
+    <p class="author">
+      [Jay Michaels] <br />
+      [February 19th 2025]
+  </header>
+</body>
+
+
+  <main>
+    <article class="indent-pars">
+      
+      <!-- INTRODUCTION SECTION -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <section id="introduction">
+        <h2>draw_triangle(length) </h2>
+        <p>
+
+        The function was defined in a cell, and then the same function was defined again in the next cell
+        down with the directions for it to follow for the drawing. I commented out the second time it was
+        defined because it was redundant. Forward tells the turtle how far to walk, and left(120) has the 
+        turtle turn around the exterior angle. Jump puts the turtle in place to begin on the screen. Face
+        has the turtle start by facing to the right.
+
+		
+        </p>
+      </section>
+
+
+     
+	<!-- -------------------------------------------------------------------------------------------- -->
+	<!-- -------------------------------------------------------------------------------------------- -->
+	<!-- -------------------------------------------------------------------------------------------- -->
+	<!-- -------------------------------------------------------------------------------------------- -->
+	<section id="code">
+	<pre><code class="language-python">
+
+# Define the function to draw an equilateral triangle
+def draw_triangle(length):
+    for _ in range(3):
+        forward(length)
+        left(160)
+
+  initializeTurtle()
+showturtle()
+
+# Define the function to draw an equilateral triangle
+#def draw_triangle(length):
+ #   for _ in range(3):
+  #      forward(length)
+   #     left(140)
+
+# Set up the turtle
+jump(300, 400)
+face(90)
+color('red')
+length = 350
+draw_triangle(length)
+
+show()
+
+
+	</code></pre>
+
+      </section>
+
+      <!-- RESULTS & ANALYSIS SECTION -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <section id="results">
+      
+      
+        <h2>Results &amp; Analysis</h2>
+        <p>
+        Since it is supposed to make an equilateral triangle, if the turning degrees are changed it still moves
+        the same distance and so no longer makes a triangle.
+        </p>
+
+
+
+
+        <figure>
+          <img
+            src="equilateral turtle.png"
+            alt="equilateral turtle"
+            width="600"
+            height="400"
+            loading="lazy"
+          />
+          <figcaption>
+            160 degree exterior angle
+          </figcaption>
+        </figure>
+
+
+
+
+      </section>
+
+ <h2>Sierpinski Triangle</h2>
+        <p>
+        The sierpinski triangle function calls on itself, which makes it recursive. If the order is
+        set to 0 to start, it will just use the previously defined draw_triangle() function to make 
+        an equilateral triangle. If the order is set to be a higher number, then the function begins
+        to draw the Sierpinski Triangle. As it works its way through the function, it splits the distance
+        in half and subtracts 1 from the order. This repeats until the order is 0 and the turtle returns
+        back to the starting point.
+        </p>
+      </section>
+
+
+     
+	<!-- -------------------------------------------------------------------------------------------- -->
+	<!-- -------------------------------------------------------------------------------------------- -->
+	<!-- -------------------------------------------------------------------------------------------- -->
+	<!-- -------------------------------------------------------------------------------------------- -->
+	<section id="code">
+	<pre><code class="language-python">
+
+# Define the recursive Sierpinski triangle function
+def sierpinski_triangle(length, order):
+    if order == 0:
+        draw_triangle(length)
+    else:
+        sierpinski_triangle(length / 2, order - 1)
+        forward(length / 2)
+        sierpinski_triangle(length / 2, order - 1)
+        backward(length / 2)
+        left(60)
+        forward(length / 2)
+        right(60)
+        sierpinski_triangle(length / 2, order - 1)
+        left(60)
+        backward(length / 2)
+        right(60)
+
+
+  initializeTurtle()
+showturtle()
+
+# Set up the turtle
+jump(300, 500)
+face(90)
+color('red')
+
+# Draw the Sierpinski triangle
+length = 400
+order = 2
+sierpinski_triangle(length, order)
+
+show()
+	</code></pre>
+
+
+</section>
+
+      <!-- RESULTS & ANALYSIS SECTION -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <section id="results">
+      
+      
+        <h2>Results &amp; Analysis</h2>
+        <p>
+        Since the sierpinski triangle function calls on the previous draw triangle function, the exterior
+        angle that the turtle was told to turn there carries over to here. Because I had set the angle to
+        be 160 degrees, the equilateral triangles fell apart.
+        </p>
+
+
+
+
+        <figure>
+          <img
+            src="chaos sierpinski.png"
+            alt="chaos sierpinski"
+            width="600"
+            height="400"
+            loading="lazy"
+          />
+          <figcaption>
+            Sierpinski Triangle with the wrong angle measurement
+          </figcaption>
+        </figure>
+
+
+      </section>
+
+ <h2>Cellular Automata</h2>
+        <p>
+        The 90 is converted to an 8 bit binary string. That is then used in each rule. In the cells below,
+        the code says that if we take a square, and look at the squares above, above left, and above right,
+        those lights being on or off in a specific order will determine if my square is on or off. This is 
+        shown by things like [1,1,1] would be all three lights above are on, and if it said [1,1,1] = 1, then 
+        the pixel I am looking at would be on as well. However, in the Sierpinski triangle, that scenario
+        where three in a row are lit would not happen and so it does not matter if it equals 1 or 0. If the
+        number is changed from 90 to something else, like 79, the rules will change and then the picture will
+        change correspondingly.
+        </p>
+      </section>
+
+
+     
+	<!-- -------------------------------------------------------------------------------------------- -->
+	<!-- -------------------------------------------------------------------------------------------- -->
+	<!-- -------------------------------------------------------------------------------------------- -->
+	<!-- -------------------------------------------------------------------------------------------- -->
+	<section id="code">
+	<pre><code class="language-python">
+
+num = 79
+print(f'{num:08b}')
+
+rule = np.zeros((2,2,2))
+
+rule[0,0,0] = 0
+rule[0,0,1] = 1
+rule[0,1,0] = 0
+rule[0,1,1] = 0
+rule[1,0,0] = 1
+rule[1,0,1] = 1
+rule[1,1,0] = 1
+rule[1,1,1] = 1
+
+
+def CA(X):
+
+    for i in range(1,X.shape[0]-1): #row
+        for j in range(1,X.shape[1]-1): #col
+
+            N  = X[i+1,j]
+            NW = X[i+1,j+1]
+            NE = X[i+1,j-1]
+
+            X[i,j] = rule[NW,N,NE]
+
+    return X
+
+		
+	</code></pre>
+
+
+</section>
+
+      <!-- RESULTS & ANALYSIS SECTION -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <section id="results">
+      
+      
+        <h2>Results &amp; Analysis</h2>
+        <p>
+      I thought that if I switched all the +/- signs in the def CA(X) function, that the sierpinski triangle
+      would be drawn upside down. This is not true. The last cell converts the number out of binary, but produces
+      the same results.
+        </p>
+
+
+
+
+        <figure>
+          <img
+            src="checkerboard.png"
+            alt="checkerboard"
+            width="600"
+            height="400"
+            loading="lazy"
+          />
+          <figcaption>
+            Rule 79
+          </figcaption>
+        </figure>
+
+
+
+
+      </section>
+	    
+      <!-- RESULTS & ANALYSIS SECTION -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <section id="results">
+
+
+      <!-- CONCLUSION SECTION -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <section id="conclusion">
+        <h2>Conclusion</h2>
+        <p>
+        conclusion here
+        </p>
+      </section>
+
+     
+     
+     
+   
+     
+     
+     
+  </main>
+
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script> <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-python.min.js"></script>
+</body>
+</html>
