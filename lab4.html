@@ -131,9 +131,11 @@ def fractal_tree(length, depth):
 
       </section>
 
- <h2>Part 2:</h2>
+ <h2>Build Tree</h2>
         <p>
-          This is where the second documentation will go.
+	This function starts with a specific length of branch, and instead of decreasing by a certain percent
+	each time, it decreases by a specific number each time. The variables are the length but also the new
+	length that is defined inside the function. 
         </p>
       </section>
 
@@ -146,7 +148,40 @@ def fractal_tree(length, depth):
 	<section id="code">
 	<pre><code class="language-python">
 
-This is where the colab will go.
+# Define the fractal tree function
+def build_tree(branch_length, shorten_by, angle):
+    if branch_length > 3:
+
+        forward(branch_length)
+
+        new_length = branch_length - shorten_by
+
+        left(angle)
+
+        build_tree(new_length, shorten_by, angle)
+
+        right(angle * 2)
+
+        build_tree(new_length, shorten_by, angle)
+
+        left(angle)
+
+        backward(branch_length)
+
+
+# Initialize the turtle
+initializeTurtle(initial_window_size=(800, 800))
+
+# Set up the turtle's starting position and orientation
+jump(400, 200)  # Starting position at the bottom center of the canvas
+face(180)
+color('red')  # Set the pen color
+
+# Draw the fractal tree
+build_tree(80,8, 25)
+
+# Display the drawing
+show()
 		
 	</code></pre>
 
@@ -163,7 +198,8 @@ This is where the colab will go.
       
         <h2>Results &amp; Analysis</h2>
         <p>
-        This is where the results and analysis will go.
+        By changing the starting location of the tree and the direction the turtle would face as it started,
+	the tree can be inverted into a root system.
         </p>
 
 
