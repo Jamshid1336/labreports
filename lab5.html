@@ -18,7 +18,7 @@
     <h1>Fractal Geometry Lab Report</h1>
     <p class="author">
       [Jay Michaels] <br />
-      [ENTER DATE HERE]
+      [March 16th 2025]
   </header>
 </body>
 
@@ -32,11 +32,14 @@
       <!-- -------------------------------------------------------------------------------------------- -->
       <!-- -------------------------------------------------------------------------------------------- -->
       <section id="introduction">
-        <h2>Part 1: </h2>
+        <h2>Cantor Set Code</h2>
         <p>
-          This is where the first documentation will go.
-
-		
+        The Cantor Set removes the middle 1/3 of a line segment with each iteration. The code shows 6 iterations
+	of this. x_start = 0 is the beginning of the segment, and x_end = 3 is the end of the segment. The middle 
+	third from 2 to 3 will be removed. The bar height is 5, meaning that the segment is 5 units thick, and 
+	the spacing is 10, leaving 5 units of empty space between each iteration. The depth determines how many times
+	the code repeats, and 1 is subtracted with each iteration. If the spacing is equal to or less than the size
+	thickness of the segment, they will start to join or overlap (Figure 1). 
         </p>
       </section>
 
@@ -49,7 +52,42 @@
 	<section id="code">
 	<pre><code class="language-python">
 
-This is where the colab will go.
+x_start = 0       # Starting x-coordinate of the first bar
+x_end = 5         # Ending x-coordinate of the first bar
+y_position = 0    # Starting y-coordinate (height of the first bar)
+bar_height = 5    # Height of each bar
+spacing = 10      # Space between bars (distance downwards)
+depth = 6         # Number of levels to draw
+
+# Define a function to create the Cantor Set pattern
+def cantor_set(x_start, x_end, y_position, depth):
+    if depth == 0:
+        return []
+
+    # Left and right segments for the current bar
+    left_segment = [[x_start, x_start + (x_end - x_start) / 5, y_position]]
+    right_segment = [[x_end - (x_end - x_start) / 5, x_end, y_position]]
+
+    # Recursively generate segments for the next levels
+    left_recursive = cantor_set(x_start, x_start + (x_end - x_start) / 5, y_position - spacing, depth - 1)
+    right_recursive = cantor_set(x_end - (x_end - x_start) / 5, x_end, y_position - spacing, depth - 1)
+
+    # Combine the current segments with the results from recursive calls
+    return left_segment + right_segment + left_recursive + right_recursive
+
+# Generate Cantor Set segments data
+segments = np.array(cantor_set(x_start, x_end, y_position, depth))  # Convert to an array for easy plotting
+
+# Plot the Cantor Set
+plt.figure(figsize=(25, 25))
+
+# Draw each segment as a black bar
+for x_start, x_end, y in segments:
+    plt.fill_between([x_start, x_end], [y] * 2, [y - bar_height] * 2, color="black")
+
+# Hide the axes for a clean look
+#plt.axis('off')
+plt.show()
 
 
 	</code></pre>
@@ -66,33 +104,51 @@ This is where the colab will go.
       
         <h2>Results &amp; Analysis</h2>
         <p>
-          This is where the results and analysis will go.
-        </p>
+	The length x_end variable can be set as any number, because since it is being divided into 3 equal increments, it 
+	doesn't matter if the length is 3 or any number not divisible by 3, it will still be divided into thirds. I 
+	wondered if using a prime number would have any affect on dividing the segment, but it did not. Changing the 
+	length of the segment to 5 and then dividing the starts/ends by 5 did not produce alternating 3-ons-2-offs.        
+	</p>
 
 
 
 
         <figure>
           <img
-            src="sierpinski.png"
-            alt="picture"
+            src="cantor 1.png"
+            alt="cantor 1"
             width="600"
             height="400"
             loading="lazy"
           />
           <figcaption>
-            caption
+            Overlapping Segments
+          </figcaption>
+        </figure>
+
+
+        <figure>
+          <img
+            src="cantor 5.png"
+            alt="cantor 5"
+            width="600"
+            height="400"
+            loading="lazy"
+          />
+          <figcaption>
+            3 "off" Middle Segments
           </figcaption>
         </figure>
 
 
 
-
       </section>
 
- <h2>Part 2:</h2>
+ <h2>5 Segments</h2>
         <p>
-          This is where the second documentation will go.
+        I wanted to split a length 5 segment into five pieces that displayed as on-off-on-off-on. I changed the 
+	length of the segment to 5 and changed the / 2 to / 5. This made the two 1/5 end segments, but did not
+	show the middle 1/5. I added a middle segment that started at 2 and ended at 3.
         </p>
       </section>
 
@@ -105,8 +161,44 @@ This is where the colab will go.
 	<section id="code">
 	<pre><code class="language-python">
 
-This is where the colab will go.
-		
+x_start = 0       # Starting x-coordinate of the first bar
+x_end = 5         # Ending x-coordinate of the first bar
+y_position = 0    # Starting y-coordinate (height of the first bar)
+bar_height = 5    # Height of each bar
+spacing = 10      # Space between bars (distance downwards)
+depth = 6         # Number of levels to draw
+
+# Define a function to create the Cantor Set pattern
+def cantor_set(x_start, x_end, y_position, depth):
+    if depth == 0:
+        return []
+
+    # Left and right segments for the current bar
+    left_segment = [[x_start, x_start + (x_end - x_start) / 5, y_position]]
+    middle_segment = [[x_start + ((x_end - x_start) / 5) * 2, x_end - ((x_end - x_start) / 5)* 2, y_position]]
+    right_segment = [[x_end - (x_end - x_start) / 5, x_end, y_position]]
+
+    # Recursively generate segments for the next levels
+    left_recursive = cantor_set(x_start, x_start + (x_end - x_start) / 5, y_position - spacing, depth - 1)
+    middle_recursive = cantor_set(x_start + ((x_end - x_start) / 5) * 2, x_end - ((x_end - x_start) / 5)* 2, y_position - spacing, depth - 1)
+    right_recursive = cantor_set(x_end - (x_end - x_start) / 5, x_end, y_position - spacing, depth - 1)
+
+    # Combine the current segments with the results from recursive calls
+    return left_segment + middle_segment + right_segment + left_recursive + middle_recursive + right_recursive
+
+# Generate Cantor Set segments data
+segments = np.array(cantor_set(x_start, x_end, y_position, depth))  # Convert to an array for easy plotting
+
+# Plot the Cantor Set
+plt.figure(figsize=(25, 25))
+
+# Draw each segment as a black bar
+for x_start, x_end, y in segments:
+    plt.fill_between([x_start, x_end], [y] * 2, [y - bar_height] * 2, color="black")
+
+# Hide the axes for a clean look
+#plt.axis('off')
+plt.show()		
 	</code></pre>
 
 
@@ -122,7 +214,7 @@ This is where the colab will go.
       
         <h2>Results &amp; Analysis</h2>
         <p>
-        This is where the results and analysis will go.
+        This created a 3rd 1/5, and when I added it to the recursion it worked all the way down throughthe 6 iterations.
         </p>
 
 
@@ -130,83 +222,21 @@ This is where the colab will go.
 
         <figure>
           <img
-            src="sierpinski.png"
-            alt="picture"
+            src="cantor-fifths.png"
+            alt="fifths"
             width="600"
             height="400"
             loading="lazy"
           />
           <figcaption>
-            caption
+            5 Cantor Segments
           </figcaption>
         </figure>
 
 
       </section>
 
- <h2>Part 3:</h2>
-        <p>
-          This is where the documentation will go.
-        </p>
-      </section>
 
-
-     
-	<!-- -------------------------------------------------------------------------------------------- -->
-	<!-- -------------------------------------------------------------------------------------------- -->
-	<!-- -------------------------------------------------------------------------------------------- -->
-	<!-- -------------------------------------------------------------------------------------------- -->
-	<section id="code">
-	<pre><code class="language-python">
-
-This is where the colab will go.
-
-		
-	</code></pre>
-
-
-</section>
-
-      <!-- RESULTS & ANALYSIS SECTION -->
-      <!-- -------------------------------------------------------------------------------------------- -->
-      <!-- -------------------------------------------------------------------------------------------- -->
-      <!-- -------------------------------------------------------------------------------------------- -->
-      <!-- -------------------------------------------------------------------------------------------- -->
-      <section id="results">
-      
-      
-        <h2>Results &amp; Analysis</h2>
-        <p>
-        This is where the results and analysis will go.
-        </p>
-
-
-
-
-        <figure>
-          <img
-            src="sierpinski.png"
-            alt="picture"
-            width="600"
-            height="400"
-            loading="lazy"
-          />
-          <figcaption>
-            caption
-          </figcaption>
-        </figure>
-
-
-
-
-      </section>
-	    
-      <!-- RESULTS & ANALYSIS SECTION -->
-      <!-- -------------------------------------------------------------------------------------------- -->
-      <!-- -------------------------------------------------------------------------------------------- -->
-      <!-- -------------------------------------------------------------------------------------------- -->
-      <!-- -------------------------------------------------------------------------------------------- -->
-      <section id="results">
 
 
       <!-- CONCLUSION SECTION -->
