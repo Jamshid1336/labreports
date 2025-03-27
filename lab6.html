@@ -32,12 +32,101 @@
       <!-- -------------------------------------------------------------------------------------------- -->
       <!-- -------------------------------------------------------------------------------------------- -->
       <section id="introduction">
-        <h2>Part 1: </h2>
+        <h2>Matrix</h2>
         <p>
-          This is where the first documentation will go.
+        Numpy and matplotlib are dictionaries for different commands that we can use in the code. The
+	generate_grid(size) function is defined, which makes the scatter plot of values on the x-y plane.
+	The grid is then plotted and the dimensions of the  grid, the size of the points, and the number 
+	of points is entered. My first edits were to change the dimensions of the grid so that the entire
+	image would be visible on my laptop screen, and to change the point size and color for better
+	visibility as well.
 
 		
         </p>
+
+
+	        <figure>
+          <img
+            src="50x50.png"
+            alt="50x50"
+            width="600"
+            height="400"
+            loading="lazy"
+          />
+          <figcaption>
+            updated grid
+          </figcaption>
+        </figure>
+
+	<p>
+	j is used for imaginary/complex numbers in python, so the variable z is defined to be complex. Then different operations can
+	be done to z to create different patterns on the scatter plot. Several examples are included below. Even and odd exponents 
+	create different patterns from each other. Roots of z can also be evaluated, keeping in mind that odd roots do not have imaginary
+	numbers. There are also iterations included when evaluating for z, so this value can be increased and further iterations can be
+	interpreted. These images are symmetrical and remind me of how, as a child, I would put paint on paper and fold it to create
+	reflected artwork.
+		
+	</p>
+
+	 <figure>
+          <img
+            src="z4i1.png"
+            alt="z4i1"
+            width="600"
+            height="400"
+            loading="lazy"
+          />
+          <figcaption>
+            z**4, iteration 1
+          </figcaption>
+        </figure>
+
+	 <figure>
+          <img
+            src="z5i1.png"
+            alt="z5i1"
+            width="600"
+            height="400"
+            loading="lazy"
+          />
+          <figcaption>
+            z**5, iteration 1
+          </figcaption>
+        </figure>
+
+
+	      <p>As the iterations increase, the points become sparse. However, if the number of points displayed in the grid is increased,
+		then the number of points visible in the iteration increases as well.</p>
+
+
+	 <figure>
+          <img
+            src="z5i1-100.png"
+            alt="z5i1-100"
+            width="600"
+            height="400"
+            loading="lazy"
+          />
+          <figcaption>
+            z**5, iteration 1 (grid of 100)
+          </figcaption>
+        </figure>
+
+
+
+	      
+	 <figure>
+          <img
+            src="z5i3.png"
+            alt="z5i3"
+            width="600"
+            height="400"
+            loading="lazy"
+          />
+          <figcaption>
+            z**5, iteration 3 (grid of 100)
+          </figcaption>
+        </figure>
       </section>
 
 
@@ -49,158 +138,47 @@
 	<section id="code">
 	<pre><code class="language-python">
 
-This is where the colab will go.
+import numpy as np
+import matplotlib.pyplot as plt
 
+def generate_grid(size):
+    x = np.linspace(-1, 1, size) 
+    y = np.linspace(-1, 1, size)
+    grid = np.meshgrid(x, y) 
+    return grid
+
+def plot_grid(grid):
+    x_grid, y_grid = grid
+    plt.figure(figsize=(8, 5))
+    plt.scatter(x_grid, y_grid, s=3, color='DarkRed')  
+    plt.title(f'2D Grid of {len(x_grid)}x{len(y_grid)} points')
+    plt.show()
+
+size = 100  
+
+grid = generate_grid(size)
+plot_grid(grid)
+
+
+
+def iterative_transform(grid, iterations):
+    x_grid, y_grid = grid
+    z = x_grid + 1j * y_grid  
+    for i in range(iterations):
+        z = z ** 5  
+    return np.real(z), np.imag(z)
+
+iterations = 3
+
+fractal_grid = iterative_transform(grid, iterations)
+
+plot_grid(fractal_grid)
 
 	</code></pre>
 
       </section>
 
-      <!-- RESULTS & ANALYSIS SECTION -->
-      <!-- -------------------------------------------------------------------------------------------- -->
-      <!-- -------------------------------------------------------------------------------------------- -->
-      <!-- -------------------------------------------------------------------------------------------- -->
-      <!-- -------------------------------------------------------------------------------------------- -->
-      <section id="results">
-      
-      
-        <h2>Results &amp; Analysis</h2>
-        <p>
-          This is where the results and analysis will go.
-        </p>
-
-
-
-
-        <figure>
-          <img
-            src="sierpinski.png"
-            alt="picture"
-            width="600"
-            height="400"
-            loading="lazy"
-          />
-          <figcaption>
-            caption
-          </figcaption>
-        </figure>
-
-
-
-
-      </section>
-
- <h2>Part 2:</h2>
-        <p>
-          This is where the second documentation will go.
-        </p>
-      </section>
-
-
-     
-	<!-- -------------------------------------------------------------------------------------------- -->
-	<!-- -------------------------------------------------------------------------------------------- -->
-	<!-- -------------------------------------------------------------------------------------------- -->
-	<!-- -------------------------------------------------------------------------------------------- -->
-	<section id="code">
-	<pre><code class="language-python">
-
-This is where the colab will go.
-		
-	</code></pre>
-
-
-</section>
-
-      <!-- RESULTS & ANALYSIS SECTION -->
-      <!-- -------------------------------------------------------------------------------------------- -->
-      <!-- -------------------------------------------------------------------------------------------- -->
-      <!-- -------------------------------------------------------------------------------------------- -->
-      <!-- -------------------------------------------------------------------------------------------- -->
-      <section id="results">
-      
-      
-        <h2>Results &amp; Analysis</h2>
-        <p>
-        This is where the results and analysis will go.
-        </p>
-
-
-
-
-        <figure>
-          <img
-            src="sierpinski.png"
-            alt="picture"
-            width="600"
-            height="400"
-            loading="lazy"
-          />
-          <figcaption>
-            caption
-          </figcaption>
-        </figure>
-
-
-      </section>
-
- <h2>Part 3:</h2>
-        <p>
-          This is where the documentation will go.
-        </p>
-      </section>
-
-
-     
-	<!-- -------------------------------------------------------------------------------------------- -->
-	<!-- -------------------------------------------------------------------------------------------- -->
-	<!-- -------------------------------------------------------------------------------------------- -->
-	<!-- -------------------------------------------------------------------------------------------- -->
-	<section id="code">
-	<pre><code class="language-python">
-
-This is where the colab will go.
-
-		
-	</code></pre>
-
-
-</section>
-
-      <!-- RESULTS & ANALYSIS SECTION -->
-      <!-- -------------------------------------------------------------------------------------------- -->
-      <!-- -------------------------------------------------------------------------------------------- -->
-      <!-- -------------------------------------------------------------------------------------------- -->
-      <!-- -------------------------------------------------------------------------------------------- -->
-      <section id="results">
-      
-      
-        <h2>Results &amp; Analysis</h2>
-        <p>
-        This is where the results and analysis will go.
-        </p>
-
-
-
-
-        <figure>
-          <img
-            src="sierpinski.png"
-            alt="picture"
-            width="600"
-            height="400"
-            loading="lazy"
-          />
-          <figcaption>
-            caption
-          </figcaption>
-        </figure>
-
-
-
-
-      </section>
-	    
+ 
       <!-- RESULTS & ANALYSIS SECTION -->
       <!-- -------------------------------------------------------------------------------------------- -->
       <!-- -------------------------------------------------------------------------------------------- -->
