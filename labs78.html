@@ -136,7 +136,9 @@ def mandelbrot_set(xmin, xmax, ymin, ymax, width, height, max_iter):
 
  <h2>Julia Set</h2>
         <p>
-          This is where the second documentation will go.
+          Functionally, as far as Python the Mandelbrot code and the Julia code work similarly. But with the Julia Set, you get to
+	choose two numbers that go into the creation of the complex numbers, and those two numbers change the image even with just 
+	small tweaks.
         </p>
       </section>
 
@@ -149,7 +151,7 @@ def mandelbrot_set(xmin, xmax, ymin, ymax, width, height, max_iter):
 	<section id="code">
 	<pre><code class="language-python">
 
-This is where the colab will go.
+c = complex(-0.75, 0.156)
 		
 	</code></pre>
 
@@ -166,7 +168,9 @@ This is where the colab will go.
       
         <h2>Results &amp; Analysis</h2>
         <p>
-        This is where the results and analysis will go.
+        The Julia Set is easier to map on the screen because there is less hunting around to find visible details.
+	By changing the input numbers just a little, such as -0.8 to -0.75, the image goes from interconnected fireworks
+	to a more disconnected series of islands.
         </p>
 
 
@@ -174,14 +178,14 @@ This is where the colab will go.
 
         <figure>
           <img
-            src="sierpinski.png"
-            alt="picture"
+            src="julia c.png"
+            alt="julia c"
             width="600"
             height="400"
             loading="lazy"
           />
           <figcaption>
-            caption
+            disconnected Julia Set from changing the i and j coefficients
           </figcaption>
         </figure>
 
