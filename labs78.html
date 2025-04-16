@@ -34,10 +34,24 @@
       <section id="introduction">
         <h2>Mandelbrot Set</h2>
         <p>
-          This is where the first documentation will go.
-
-		
+        The mandelbrot set is a function that begins with a seed and iterates, in the case of this code, a specified number of times.
+	Looking at the color gradient (cmap) assigned to the zoomed-in image, it is interesting to see how the colors seem to be either
+	0 iterations or 1000 iterations, without much middle ground, although there are colors from the middle creating definition in 
+	the spirals.
         </p>
+	<p>
+	The function itself looks at numbers between the boundaries of -2 and 2, and sees what stays there as the function iterates the
+	desired number of times, in this case up to 1000. The function tracks the number of iterations at which a value diverged, and that 
+	number is assigned the corresponding color from the gradient.
+	</p>
+	<p>
+	The zoomed-in image is beautiful, but finding the right space to zoom in on is difficult. Without much aim you can end up out in the
+	middle of the "ocean" with no details to look at. Without zooming in at all, you are too far away to see anything either. 
+	</p>
+	<p>
+	The original function is z*z + c. This can be changed to any exponent, but without changing where the image is zoomed in to, you may end
+	up looking at a blank square.
+	</p>
       </section>
 
 
@@ -49,8 +63,26 @@
 	<section id="code">
 	<pre><code class="language-python">
 
-This is where the colab will go.
+def mandelbrot(c, max_iter):
+    z = 0
+    n = 0
+    while abs(z) <= 2 and n < max_iter:
+        z = z*z + c
+        n += 1
+    return n
 
+# JIT-optimized mandelbrot set generator
+@jit(nopython=True)
+def mandelbrot_set(xmin, xmax, ymin, ymax, width, height, max_iter):
+    r1 = np.linspace(xmin, xmax, width)
+    r2 = np.linspace(ymin, ymax, height)
+    n3 = np.empty((width, height))
+
+    for i in range(width):
+        for j in range(height):
+            n3[i, j] = mandelbrot(r1[i] + 1j * r2[j], max_iter)
+
+    return n3
 
 	</code></pre>
 
@@ -66,7 +98,8 @@ This is where the colab will go.
       
         <h2>Results &amp; Analysis</h2>
         <p>
-          This is where the results and analysis will go.
+        It is difficult to figure out where the detailed parts of the Mandelbrot set are to zoom in on. There must
+	be a better way to determine coordinates.
         </p>
 
 
@@ -74,19 +107,30 @@ This is where the colab will go.
 
         <figure>
           <img
-            src="sierpinski.png"
-            alt="picture"
+            src="cmap jet.png"
+            alt="jet"
             width="600"
             height="400"
             loading="lazy"
           />
           <figcaption>
-            caption
+            cmap changed to 'jet'
           </figcaption>
         </figure>
 
 
-
+ 	<figure>
+          <img
+            src="mandelbrot edge.png"
+            alt="edge"
+            width="600"
+            height="400"
+            loading="lazy"
+          />
+          <figcaption>
+            Found the edge of the set through trial and error
+          </figcaption>
+        </figure>
 
       </section>
 
