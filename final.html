@@ -339,7 +339,12 @@ rules = {'F': 'FF-[-F+F+F-F-F]+[+F+F-F+F]'}
 
    <h2>Hilbert Curves</h2>
         <p>
-          This is where the second documentation will go.
+         This Hilbert Curve creates what looks like a square labyrinth. The labyrinth is build by having axioms 
+	inside other axioms. F is still the character the code is looking for, but now L and R also are a part of 
+	the rules. F is forward, + is left, - is right. L is a new rule that has more Ls, Fs, and Rs in it. R is 
+	also a new rule that has Ls and Fs and Rs in it. Every time the code sees a character, it evaluates whether 
+	to move forward, to turn, or to replace the character with a new string of directions. This causes the iterations 
+	that make the structure of the pattern.
         </p>
       </section>
 
@@ -352,7 +357,13 @@ rules = {'F': 'FF-[-F+F+F-F-F]+[+F+F-F+F]'}
 	<section id="code">
 	<pre><code class="language-python">
 
-This is where the colab will go.
+axiom = 'L'
+rules = {
+    'L': 'FFRFFRFFR', #-RF+LFL+FR-
+    'R': '+F+F--F+F--F+F--F+F+F' #+LF-RFR-FL+
+}
+iterations = 8  # Adjust the iterations to change the order (e.g., 1 to 5)
+angle = 60
 		
 	</code></pre>
 
@@ -369,7 +380,7 @@ This is where the colab will go.
       
         <h2>Results &amp; Analysis</h2>
         <p>
-        This is where the results and analysis will go.
+        It is somewhat brute force, but I managed to make a small version of a Koch Snowflake-like pattern.
         </p>
 
 
@@ -377,14 +388,14 @@ This is where the colab will go.
 
         <figure>
           <img
-            src="sierpinski.png"
-            alt="picture"
+            src="t.koch.png"
+            alt="t.koch"
             width="600"
             height="400"
             loading="lazy"
           />
           <figcaption>
-            caption
+            A sort of Koch Pattern
           </figcaption>
         </figure>
 
