@@ -121,7 +121,13 @@ plt.show()
 
  <h2>Barnsley Fern</h2>
         <p>
-          This is where the second documentation will go.
+        This Barnsley Fern is a fractal generated from four functions, f1, f2, f3, and f4. Each function is 
+	responsible for a piece of the fern, such as the stem, left leaves, and right leaves. By changing the 
+	coefficients of the previous x and y values that make the new x and y values, the stem can be made to 
+	look disjointed, the leaves can be made to be more full or more sparse, and can be twisted and curled 
+	around the stem also. Editing the coefficients of y in f3 and f4 changes the twisting of the leaves.
+	Changing the coefficient of the x in the new x and the y in the new y changes the overall fullness and 
+	curvature of the plant.
         </p>
       </section>
 
@@ -134,7 +140,28 @@ plt.show()
 	<section id="code">
 	<pre><code class="language-python">
 
-This is where the colab will go.
+	def f1(x, y):
+    x = 0
+    y = 0.16 * y
+    return x, y
+
+def f2(x, y):
+    x_new = 0.99 * x + 0.04 * y
+    y_new = -0.04 * x + 0.99 * y + 1.6
+    return x_new, y_new
+
+def f3(x, y):
+    x_new = 0.9 * x - 0.5 * y
+    y_new = 0.23 * x + 0.5 * y + 1.6
+    return x_new, y_new
+
+def f4(x, y):
+    x_new = -0.9 * x + 0.5 * y
+    y_new = 0.26 * x + 0.5 * y + 0.44
+    return x_new, y_new
+
+# Probabilities for each function
+probabilities = [0.01, 0.85, 0.07, 0.07].
 		
 	</code></pre>
 
@@ -151,28 +178,69 @@ This is where the colab will go.
       
         <h2>Results &amp; Analysis</h2>
         <p>
-        This is where the results and analysis will go.
+        Originally I did not change the probabilities of each function being used. What they do is change the chance 
+	that the function will happen, so having more probability on f2 makes a strong stem, while f3 and f2 makes 
+	the leaves to the side. If the probability of f3 and f4 is raised and the f2 probability is lowered, then there 
+	are more leaves and the stem loses its bulk. These images show the results of changes to the functions and to 
+	the probabilities.
         </p>
-
-
 
 
         <figure>
           <img
-            src="sierpinski.png"
-            alt="picture"
+            src="xmas tree.png"
+            alt="xmas tree"
             width="600"
             height="400"
             loading="lazy"
           />
           <figcaption>
-            caption
+            Christmas Tree
           </figcaption>
         </figure>
 
+        <figure>
+          <img
+            src="peacock.png"
+            alt="peacock"
+            width="600"
+            height="400"
+            loading="lazy"
+          />
+          <figcaption>
+            Peacock
+          </figcaption>
+        </figure>
 
+	      
+        <figure>
+          <img
+            src="twisted.png"
+            alt="peacock"
+            width="600"
+            height="400"
+            loading="lazy"
+          />
+          <figcaption>
+            Twisted Tree
+          </figcaption>
+        </figure>
       </section>
 
+	      
+        <figure>
+          <img
+            src="sparse.png"
+            alt="sparse"
+            width="600"
+            height="400"
+            loading="lazy"
+          />
+          <figcaption>
+            Sparse Tree
+          </figcaption>
+        </figure>
+      </section>
  <h2>L-Systems</h2>
         <p>
           This is where the documentation will go.
