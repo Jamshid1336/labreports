@@ -243,7 +243,11 @@ probabilities = [0.01, 0.85, 0.07, 0.07].
       </section>
  <h2>L-Systems</h2>
         <p>
-          This is where the documentation will go.
+        L-system stands for Lindenmayer System. This is a method of making complex images using simple rules. 
+	In this case, the code looks at a string of characters and symbols one piece at a time. F moves forward,
+	+ turns left, and - turns right. A string might look like F+F+F-FF-F. That would move forward, left, forward, 
+	left again, forward and then right, forward twice, another right, and another forward. The string is called 
+	an axiom.
         </p>
       </section>
 
@@ -256,7 +260,26 @@ probabilities = [0.01, 0.85, 0.07, 0.07].
 	<section id="code">
 	<pre><code class="language-python">
 
-This is where the colab will go.
+def draw_lsystem(turtle_string, length, angle):
+    stack = []
+    for command in turtle_string:
+        if command == 'F':
+            forward(length)
+        elif command == '+':
+            left(angle)
+        elif command == '-':
+            right(angle)
+        elif command == '[':
+            position = (getx(), gety())
+            heading_angle = heading()
+            stack.append((position, heading_angle))
+        elif command == ']':
+            position, heading_angle = stack.pop()
+            jump(position[0], position[1])
+            face(heading_angle)
+
+# Define the L-system rules
+rules = {'F': 'FF-[-F+F+F-F-F]+[+F+F-F+F]'}
 
 		
 	</code></pre>
@@ -274,7 +297,9 @@ This is where the colab will go.
       
         <h2>Results &amp; Analysis</h2>
         <p>
-        This is where the results and analysis will go.
+        In the code I did not change what the symbols did, but I did change the rule several times to make different images. 
+	larger angles turned made more visibly polygon shaped designs, while smaller angles turned made more a thinner image. 
+	Also, by alternating lefts and rights, the fractal could be made to have a wavy look instead of sharp turns.
         </p>
 
 
@@ -282,17 +307,30 @@ This is where the colab will go.
 
         <figure>
           <img
-            src="sierpinski.png"
-            alt="picture"
+            src="turns.png"
+            alt="turns"
             width="600"
             height="400"
             loading="lazy"
           />
           <figcaption>
-            caption
+            Wavier Fronds
           </figcaption>
         </figure>
 
+
+        <figure>
+          <img
+            src="both sides.png"
+            alt="both sides"
+            width="600"
+            height="400"
+            loading="lazy"
+          />
+          <figcaption>
+            Lefts and Rights changed to balance both sides
+          </figcaption>
+        </figure>
 
 
 
